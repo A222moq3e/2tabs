@@ -3,7 +3,7 @@ let title = document.querySelector('.data h2');
 let position = document.querySelector('.data .position');
 let tab;
 let opsiteTab;
-let windowPosition = [window.screenX+500,window.screenY+290]
+// let windowPosition = [window.screenX+500,window.screenY+290]
 if(localStorage.getItem('tab2')){
     title.innerHTML = 'You alredy open 2 tabs!, click restart Button'
     localStorage.removeItem('tab1');localStorage.removeItem('tab2');window.location.reload();
@@ -24,12 +24,16 @@ setInterval(function(){
 }, 100);
 
 function getPostion(){
-    // return [window.innerHeight/2,window.innerWidth/2]
+    // console.log(window.screen.height);
+    // console.log(window.screen.width);
+    // return [(window.screen.height)/2,(window.screen.width)/2]
     return [window.screenX+500,window.screenY+290]
 }
 
 // Canvas
 var canvas= document.getElementById("canvas");
+canvas.style.width = window.screen.width
+canvas.style.height = window.screen.height
 var ctx= canvas.getContext("2d");
 
 
