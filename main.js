@@ -4,6 +4,14 @@ let position = document.querySelector('.data .position');
 let tab;
 let opsiteTab;
 // let windowPosition = [window.screenX+500,window.screenY+290]
+
+
+// Canvas
+var canvas= document.getElementById("canvas");
+canvas.style.width = window.screen.width;
+canvas.style.height = window.screen.height;
+var ctx= canvas.getContext("2d");
+
 if(localStorage.getItem('tab2')){
     title.innerHTML = 'You alredy open 2 tabs!, click restart Button'
     localStorage.removeItem('tab1');localStorage.removeItem('tab2');window.location.reload();
@@ -11,30 +19,33 @@ if(localStorage.getItem('tab2')){
     tab='tab2';
     opsiteTab ='tab1';
     localStorage.setItem(tab,getPostion())
-    title.innerHTML = 'second tab'
+    title.innerHTML = 'Cat2'
+    // canvas.style.backgroundImage = "url('./catFight.jpg')"
+    
 }else{
     tab='tab1';
     opsiteTab ='tab2';
     localStorage.setItem(tab,getPostion())
-    title.innerHTML = 'first tab'
+    title.innerHTML = 'Cat1'
 }
 
 setInterval(function(){ 
     localStorage.setItem(tab,getPostion())
-}, 100);
+    if(localStorage.getItem(opsiteTab)>localStorage.getItem(tab)){
+        canvas.classList.add('rotate');
+    }else{
+        canvas.classList.remove('rotate');
+    }
+}, 10);
 
 function getPostion(){
     // console.log(window.screen.height);
     // console.log(window.screen.width);
     // return [(window.screen.height)/2,(window.screen.width)/2]
+
     return [window.screenX+500,window.screenY+290]
 }
 
-// Canvas
-var canvas= document.getElementById("canvas");
-canvas.style.width = window.screen.width
-canvas.style.height = window.screen.height
-var ctx= canvas.getContext("2d");
 
 
 window.addEventListener('storage',()=>{
@@ -43,16 +54,16 @@ window.addEventListener('storage',()=>{
     position.innerHTML = storageOpsitePosition
     
         // Start a new Path
-    ctx.beginPath();
-    ctx.strokeStyle = '#ff0000';
-    if(tab=='tab1') ctx.strokeStyle = '#ff5500';
-    if(tab=='tab2') ctx.strokeStyle = '#0055ff';
-    ctx.moveTo(750, 390);
-    // ctx.moveTo(canvas.offsetHeight, canvas.offsetWidth);
-    ctx.lineTo(storageOpsitePosition[0], storageOpsitePosition[1]);
+    // ctx.beginPath();
+    // ctx.strokeStyle = '#ff0000';
+    // if(tab=='tab1') ctx.strokeStyle = '#ff5500';
+    // if(tab=='tab2') ctx.strokeStyle = '#0055ff';
+    // ctx.moveTo(750, 390);
+    // // ctx.moveTo(canvas.offsetHeight, canvas.offsetWidth);
+    // ctx.lineTo(storageOpsitePosition[0], storageOpsitePosition[1]);
 
-    // Draw the Path
-    ctx.stroke();
+    // // Draw the Path
+    // ctx.stroke();
 })
 
 
