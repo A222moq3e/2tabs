@@ -31,11 +31,21 @@ if(localStorage.getItem('tab2')){
 
 setInterval(function(){ 
     localStorage.setItem(tab,getPostion())
-    if(localStorage.getItem(opsiteTab)>localStorage.getItem(tab)){
+    let tab1Pos = parseInt(localStorage.getItem(tab));
+    let opsiteTabPos = parseInt(localStorage.getItem(opsiteTab));
+    console.log(opsiteTabPos-tab1Pos);
+    if(Math.abs(opsiteTabPos-tab1Pos)<500){
+        canvas.style.backgroundImage = "url('./catCry.jpeg')"
+    }else{
+        canvas.style.backgroundImage = "url('./catFight.jpg')"
+        
+    }
+    if(opsiteTabPos>tab1Pos){
         canvas.classList.add('rotate');
     }else{
         canvas.classList.remove('rotate');
     }
+    
 }, 10);
 
 function getPostion(){
