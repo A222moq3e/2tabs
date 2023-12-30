@@ -72,6 +72,7 @@ ctx.fillStyle='#5a5aff';
 
 
 function drawLine(){
+    if(timeLoop==10*6) timeLoop = 0
     timeLoop+=.01
     ctx.clearRect(0,0, canvas.width, canvas.height)
     let storageOpsitePosition= (localStorage.getItem(opsiteTab)).split(',')
