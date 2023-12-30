@@ -3,6 +3,7 @@ let title = document.querySelector('.data h2');
 let position = document.querySelector('.data .position');
 let tab;
 let opsiteTab;
+let timeLoop =0;
 // let windowPosition = [window.screenX+500,window.screenY+290]
 if(localStorage.getItem('tab2')){
     title.innerHTML = 'You alredy open 2 tabs!, click restart Button'
@@ -25,10 +26,6 @@ setInterval(function(){
 }, 100);
 
 function getPostion(){
-    // console.log(window.screen.height);
-    // console.log(window.screen.width);
-    // return [(window.screen.height)/2,(window.screen.width)/2]
-
     return [window.screenX+200,window.screenY+290]
 }
 
@@ -36,6 +33,7 @@ function getPostion(){
 var canvas= document.getElementById("canvas");
 canvas.style.width = window.screen.width
 canvas.style.height = window.screen.height
+
 var ctx= canvas.getContext("2d");
 ctx.fillStyle='#5a5aff';
 
@@ -74,7 +72,7 @@ ctx.fillStyle='#5a5aff';
 
 
 function drawLine(){
-    
+    timeLoop+=.01
     ctx.clearRect(0,0, canvas.width, canvas.height)
     let storageOpsitePosition= (localStorage.getItem(opsiteTab)).split(',')
     storageOpsitePosition = [parseInt(storageOpsitePosition[0]), parseInt(storageOpsitePosition[1])]
@@ -94,7 +92,7 @@ function drawLine(){
     for(let i =0;i<10;i++){
         ctx.beginPath();
         ctx.fillStyle = "white";
-        ctx.arc(storageOpsitePosition[0], storageOpsitePosition[1], 40 + i*80, 0, 2 * Math.PI);
+        ctx.arc(storageOpsitePosition[0], storageOpsitePosition[1], 40 + (i * 80), (timeLoop+i) * Math.PI, (1.9+timeLoop+i) * Math.PI);
         ctx.stroke();
     }
  
