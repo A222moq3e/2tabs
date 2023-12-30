@@ -20,8 +20,8 @@ if(localStorage.getItem('tab2')){
 }
 
 setInterval(function(){ 
-
     localStorage.setItem(tab,getPostion())
+    drawLine()
 }, 100);
 
 function getPostion(){
@@ -40,36 +40,95 @@ var ctx= canvas.getContext("2d");
 ctx.fillStyle='#5a5aff';
 
 
-window.addEventListener('storage',()=>{
+// window.addEventListener('storage',()=>{
 
+//     ctx.clearRect(0,0, canvas.width, canvas.height)
+//     let storageOpsitePosition= (localStorage.getItem(opsiteTab)).split(',')
+//     console.log(storageOpsitePosition);
+//     position.innerHTML = storageOpsitePosition
+//     // Rect
+//     ctx.fillRect(storageOpsitePosition[0],storageOpsitePosition[1],50,50);
+
+//     // Start a new Path
+//     ctx.beginPath();
+//     ctx.strokeStyle = '#ff0000';
+//     if(tab=='tab1') ctx.strokeStyle = '#ffffff';
+//     // if(tab=='tab1') ctx.strokeStyle = '#ff5500';
+//     if(tab=='tab2') ctx.strokeStyle = '#0055ff';
+//     ctx.lineWidth = 5;
+//     ctx.shadowColor = "#0055ff";
+//     ctx.shadowBlur = 15;
+//     ctx.shadowOffsetX = 0;
+//     ctx.shadowOffsetY = 0;
+//     ctx.moveTo(750, 390);
+//     // ctx.moveTo(canvas.offsetHeight, canvas.offsetWidth);
+//     ctx.lineTo(storageOpsitePosition[0], storageOpsitePosition[1]);
+    
+//     // ctx.moveTo(storageOpsitePosition[0], storageOpsitePosition[1]);
+//     // ctx.lineTo(storageOpsitePosition[0]-20,storageOpsitePosition[1]);
+ 
+
+//     // Draw the Path
+//     ctx.stroke();
+// })
+
+
+function drawLine(){
+    
     ctx.clearRect(0,0, canvas.width, canvas.height)
     let storageOpsitePosition= (localStorage.getItem(opsiteTab)).split(',')
+    storageOpsitePosition = [parseInt(storageOpsitePosition[0]), parseInt(storageOpsitePosition[1])]
     console.log(storageOpsitePosition);
     position.innerHTML = storageOpsitePosition
-    // Rect
-    ctx.fillRect(storageOpsitePosition[0],storageOpsitePosition[1],50,50);
+    // // Rect
+    // ctx.fillStyle = "white";
+    // ctx.fillRect(storageOpsitePosition[0]-25,storageOpsitePosition[1]-25,50,50);
+    // Circle
+    ctx.beginPath();
+    ctx.fillStyle = "white";
+    ctx.arc(storageOpsitePosition[0], storageOpsitePosition[1], 40, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
 
+    // Lots of circle Circle
+    for(let i =0;i<10;i++){
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.arc(storageOpsitePosition[0], storageOpsitePosition[1], 40 + i*80, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
+ 
     // Start a new Path
     ctx.beginPath();
-    ctx.strokeStyle = '#ff0000';
+    // ctx.strokeStyle = '#ff0000';
     if(tab=='tab1') ctx.strokeStyle = '#ffffff';
     // if(tab=='tab1') ctx.strokeStyle = '#ff5500';
     if(tab=='tab2') ctx.strokeStyle = '#0055ff';
     ctx.lineWidth = 5;
+    ctx.lineCap = "round";
     ctx.shadowColor = "#0055ff";
     ctx.shadowBlur = 15;
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
     ctx.moveTo(750, 390);
-    // ctx.moveTo(canvas.offsetHeight, canvas.offsetWidth);
     ctx.lineTo(storageOpsitePosition[0], storageOpsitePosition[1]);
-    
-    // ctx.moveTo(storageOpsitePosition[0], storageOpsitePosition[1]);
-    // ctx.lineTo(storageOpsitePosition[0]-20,storageOpsitePosition[1]);
- 
-
     // Draw the Path
     ctx.stroke();
-})
-
-
+       // Text
+    ctx.font = "bolder 70px serif";
+    ctx.fillStyle = "black";
+    let sopX = parseInt(storageOpsitePosition[0])-18;
+    let sopY =  parseInt(storageOpsitePosition[1])+20;
+    console.log('sopX',sopX);
+    console.log('sopY',sopY);
+    if(tab=='tab1') ctx.fillText("+", sopX,sopY);
+    else ctx.fillText("-", sopX,sopY);
+    // for (let i = 0; i < 6; i++) {
+    //     for (let j = 0; j < 6; j++) {
+    //       ctx.fillStyle = `rgb(${Math.floor(255 - 42.5 * i)}, ${Math.floor(
+    //         255 - 42.5 * j,
+    //       )}, 0)`;
+    //       ctx.fillRect(j * 25, i * 25, 25, 25);
+    //     }
+    //   }
+}
