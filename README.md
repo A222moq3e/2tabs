@@ -1,2 +1,5 @@
 ### 2tabs
-# ![logo](https://github.com/A222moq3e/2tabs/blob/main/logo.png)
+# ![logo](./logo.png)
+
+# ![theme1](./theme1.png)
+# ![theme2](./theme2.png)
